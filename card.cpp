@@ -3,8 +3,8 @@
 card::card(QWidget *parent) : QWidget(parent)
 {
     card_front  = new QLabel(this);
-    setFixedSize(130,200);
-    card_front->setFixedSize(130,200);
+    setFixedSize(130,186);
+    card_front->setFixedSize(130,186);
     card_front->setAlignment(Qt::AlignCenter);
     card_front->setText("??");
     card_front->show();

@@ -1,15 +1,22 @@
 #include "unobase.h"
 #include <QPixmap>
+#include <QRandomGenerator>
+#include <iostream>
 
 unobase::unobase(QWidget *parent)
     : QMainWindow(parent)
 {
-    setFixedSize(1000,800);
+    setFixedSize(1500,1200);
 
 
 
     initCards();
+
+
+    shuffleDeck();
     showDeck();
+
+
 }
 
 unobase::~unobase()
@@ -129,19 +136,36 @@ void unobase::initCards()
 
 void unobase::showDeck()
 {
-    int x = 0;
-    int y = 0;
-    QListIterator<card*> deckIterator(deck);
-    while (deckIterator.hasNext())
+    int cardWidth = deck[0]->width();
+    int cardHeight = deck[0]->height();
+
+    for (int i = 0; i < deck.size(); ++i)
     {
-        card *c = deckIterator.next();
-        c->move(70*x, 102*y);
+        card* c = deck[i];
+        c->move(i % 11 * cardWidth, i / 11 * cardHeight);
         c->show();
-        ++x;
-        if (x == 11)
-        {
-            ++y;
-            x = 0;
-        }
     }
 }
+
+
+void unobase::shuffleDeck()
+{
+    int deck_length = deck.length();
+    for (int i = deck_length - 1; i > 0; i--)
+    {
+        int j = QRandomGenerator::global()->bounded(i + 1);
+        card* temp = deck[i];
+        deck[i] = deck[j];
+        deck[j] = temp;
+
+    }
+
+}
+
+
+
+
+
+
+
+
