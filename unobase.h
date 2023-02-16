@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include <card.h>
 #include <QList>
-
+#include <QDebug>
 
 
 class unobase : public QMainWindow
@@ -16,8 +16,7 @@ public:
     ~unobase();
     void initCards();
     void showDeck();
-    //Do  Fisher-Yates shuffle next
-    void shuffleCards();
+    void shuffleDeck();
 private:
     QList<card*> deck;
 };
