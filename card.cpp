@@ -1,4 +1,5 @@
 #include "card.h"
+#include <QPixmap>
 
 card::card(QWidget *parent) : QWidget(parent)
 {
@@ -8,6 +9,14 @@ card::card(QWidget *parent) : QWidget(parent)
     card_front->setAlignment(Qt::AlignCenter);
     card_front->setText("??");
     card_front->show();
+
+    card_back = new QLabel(this);
+    card_back->setFixedSize(130,186);
+    card_back->setAlignment(Qt::AlignCenter);
+    QPixmap pic(":/Art/UNO-Back.png");
+    pic = pic.scaled(card_back->size(),Qt::KeepAspectRatio);
+    card_back->setPixmap(pic);
+    card_back->hide();
 }
 
 void card::setup(QString text,Colour clr)
