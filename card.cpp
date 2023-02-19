@@ -1,5 +1,4 @@
 #include "card.h"
-#include "unobase.h"
 #include <QPixmap>
 
 card::card(QWidget *parent) : QWidget(parent)
@@ -18,7 +17,6 @@ card::card(QWidget *parent) : QWidget(parent)
     pic = pic.scaled(card_back->size(),Qt::KeepAspectRatio);
     card_back->setPixmap(pic);
     card_back->hide();
-
 
 
 }

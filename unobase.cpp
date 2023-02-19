@@ -7,11 +7,11 @@ unobase::unobase(QWidget *parent)
 {
     setFixedSize(1500,1200);
 
+    myturn = true;
+    pickup = false;
 
 
     initCards();
-
-
     shuffleDeck();
     //showDeck();
     dealCards();
@@ -33,20 +33,24 @@ void unobase::initCards()
         deck.append(c);
         c->hide();
         c->setup(QString::number(i), Red);
+        connect(c, &card::iWasClicked, this, &unobase::cardClick);
     }
 
     c = new card(this);
     c->setup("+2",Red);
     c->hide();
     deck.append(c);
+    connect(c, &card::iWasClicked, this, &unobase::cardClick);
     c = new card(this);
     c->setup("",Red);
     c->hide();
     deck.append(c);
+    connect(c, &card::iWasClicked, this, &unobase::cardClick);
     c = new card(this);
     c->setup("sk",Red);
     c->hide();
     deck.append(c);
+    connect(c, &card::iWasClicked, this, &unobase::cardClick);
 
 
     for(int i = 0; i < 10; i++)
@@ -55,6 +59,7 @@ void unobase::initCards()
         deck.append(c);
         c->hide();
         c->setup(QString::number(i),Blue);
+        connect(c, &card::iWasClicked, this, &unobase::cardClick);
 
     }
 
@@ -62,14 +67,17 @@ void unobase::initCards()
     c->setup("+2",Blue);
     c->hide();
     deck.append(c);
+    connect(c, &card::iWasClicked, this, &unobase::cardClick);
     c = new card(this);
     c->setup("",Blue);
     c->hide();
     deck.append(c);
+    connect(c, &card::iWasClicked, this, &unobase::cardClick);
     c = new card(this);
     c->setup("sk",Blue);
     c->hide();
     deck.append(c);
+    connect(c, &card::iWasClicked, this, &unobase::cardClick);
 
     for(int i = 0; i < 10; i++)
     {
@@ -77,6 +85,7 @@ void unobase::initCards()
         deck.append(c);
         c->hide();
         c->setup(QString::number(i),Green);
+        connect(c, &card::iWasClicked, this, &unobase::cardClick);
 
     }
 
@@ -84,14 +93,17 @@ void unobase::initCards()
     c->setup("+2",Green);
     c->hide();
     deck.append(c);
+    connect(c, &card::iWasClicked, this, &unobase::cardClick);
     c = new card(this);
     c->setup("",Green);
     c->hide();
     deck.append(c);
+    connect(c, &card::iWasClicked, this, &unobase::cardClick);
     c = new card(this);
     c->setup("sk",Green);
     c->hide();
     deck.append(c);
+    connect(c, &card::iWasClicked, this, &unobase::cardClick);
 
 
     for(int i = 0; i < 10; i++)
@@ -100,6 +112,7 @@ void unobase::initCards()
         deck.append(c);
         c->hide();
         c->setup(QString::number(i),Yellow);
+        connect(c, &card::iWasClicked, this, &unobase::cardClick);
 
     }
 
@@ -107,14 +120,17 @@ void unobase::initCards()
     c->setup("+2",Yellow);
     c->hide();
     deck.append(c);
+    connect(c, &card::iWasClicked, this, &unobase::cardClick);
     c = new card(this);
     c->setup("",Yellow);
     c->hide();
     deck.append(c);
+    connect(c, &card::iWasClicked, this, &unobase::cardClick);
     c = new card(this);
     c->setup("sk",Yellow);
     c->hide();
     deck.append(c);
+    connect(c, &card::iWasClicked, this, &unobase::cardClick);
 
 
     for(int i = 0; i < 2; i++)
@@ -123,6 +139,7 @@ void unobase::initCards()
         c->hide();
         deck.append(c);
         c->setup("+4",None);
+        connect(c, &card::iWasClicked, this, &unobase::cardClick);
 
     }
     for(int i = 0; i < 2; i++)
@@ -131,6 +148,7 @@ void unobase::initCards()
         c->hide();
         deck.append(c);
         c->setup("",None);
+        connect(c, &card::iWasClicked, this, &unobase::cardClick);
 
     }
 }

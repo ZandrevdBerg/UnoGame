@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include <card.h>
 #include <QList>
-#include <QDebug>
+#include <QMouseEvent>
 
 
 class unobase : public QMainWindow
@@ -24,6 +24,9 @@ private:
     QList<card*> stack;
     QList<card*> playerhand;
     QList<card*> computerhand;
+
+    bool myturn;
+    bool pickup;
 
 
     const bool debugView = false;
