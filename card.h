@@ -30,6 +30,11 @@ private:
     QString colour;
     QLabel *card_front;
     QLabel *card_back;
+    void mousePressEvent(QMouseEvent*);
+
+
+signals:
+    void iWasClicked(card*);
 };
 
 

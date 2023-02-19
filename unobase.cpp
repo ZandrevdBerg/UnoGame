@@ -1,7 +1,6 @@
 #include "unobase.h"
 #include <QPixmap>
 #include <QRandomGenerator>
-#include <iostream>
 
 unobase::unobase(QWidget *parent)
     : QMainWindow(parent)
@@ -14,7 +13,9 @@ unobase::unobase(QWidget *parent)
 
 
     shuffleDeck();
-    showDeck();
+    //showDeck();
+    dealCards();
+    showLayout();
 
 
 }
@@ -162,8 +163,94 @@ void unobase::shuffleDeck()
 
 }
 
+void unobase::dealCards()
+{
+    stack.clear();
+    computerhand.clear();
+    playerhand.clear();
+
+    // Draw 7 cards each for the player and computer
+    for (int i = 0; i < 7; i++)
+    {
+        playerhand.prepend(deck.takeFirst());
+        computerhand.prepend(deck.takeFirst());
+    }
+
+    // Draw cards for the stack until a non-special card is drawn
+    while (true)
+    {
+        if (deck.isEmpty())
+        {
+            // The deck is empty, so we can't draw any more cards
+            break;
+        }
+
+        card *firstCard = deck.first();
+        if (firstCard->cardName() == "" || firstCard->cardName() == "+2" || firstCard->cardName() == "+4" || firstCard->cardName() == "sk")
+        {
+            // This is a special card, so remove it from the deck and draw another card
+            deck.append(deck.takeFirst());
+        }
+        else
+        {
+            // This is a non-special card, so add it to the stack
+            stack.prepend(deck.takeFirst());
+            break;
+        }
+    }
+}
 
 
+
+
+void unobase::showLayout()
+{
+
+    if (!playerhand.isEmpty())
+    {
+        for (int i = 0; i < playerhand.length(); i++) {
+            card* c = playerhand.at(i);
+            c->move(i * 136, height()-500);
+            c->ShowFront();
+            c->show();
+        }
+    }
+    if (!computerhand.isEmpty())
+    {
+        for (int i = 0; i < computerhand.length(); i++) {
+            card* c = computerhand.at(i);
+            c->move(i * 136, 0);
+            if(debugView)
+            {
+                c->ShowFront();
+            }
+            else
+            {
+                c->ShowBack();
+            }
+            c->show();
+        }
+    }
+    if(!stack.isEmpty())
+    {
+        card *c = stack.first();
+        c->move(width()/2-300, height()-800);
+        c->show();
+    }
+    if(!deck.isEmpty())
+    {
+        card *c = deck.first();
+        c->move(width()/2-150,height()-800);
+        c->ShowBack();
+        c->show();
+    }
+
+}
+
+void unobase::cardClick(card *c)
+{
+
+}
 
 
 

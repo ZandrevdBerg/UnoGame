@@ -17,7 +17,18 @@ public:
     void initCards();
     void showDeck();
     void shuffleDeck();
+    void dealCards();
+    void showLayout();
 private:
     QList<card*> deck;
+    QList<card*> stack;
+    QList<card*> playerhand;
+    QList<card*> computerhand;
+
+
+    const bool debugView = false;
+
+private slots:
+    void cardClick(card*);
 };
 #endif // UNOBASE_H

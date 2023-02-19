@@ -1,4 +1,5 @@
 #include "card.h"
+#include "unobase.h"
 #include <QPixmap>
 
 card::card(QWidget *parent) : QWidget(parent)
@@ -17,6 +18,9 @@ card::card(QWidget *parent) : QWidget(parent)
     pic = pic.scaled(card_back->size(),Qt::KeepAspectRatio);
     card_back->setPixmap(pic);
     card_back->hide();
+
+
+
 }
 
 void card::setup(QString text,Colour clr)
@@ -102,4 +106,12 @@ void card::ShowBack()
     card_back->show();
     show();
     card_front->hide();
+}
+
+void card::mousePressEvent(QMouseEvent *e)
+{
+    if(e->button() == Qt::LeftButton)
+    {
+        emit iWasClicked(this);
+    }
 }
